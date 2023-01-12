@@ -5,19 +5,16 @@ const apiUrl = "http://localhost/";
 
 export default {
   name: 'JsonTest',
+
   data() {
-
     return {
-
       newTodo: "",
-
       todoList: []
     };
   },
 
   methods: {
     formSubmit() {
-
       // usare un oggetto (params) per memorizzare parametri che saranno inviati con la richiesta GET
       const params = {
         param: {
@@ -32,16 +29,14 @@ export default {
     },
 
     getAllData() {
-
-      axios.get(apiUrl + "index.php")
+      axios.get(apiUrl)
         .then(res => {
-
           const data = res.data;
-
           this.todoList = data;
         });
     }
   },
+
   mounted() {
     this.getAllData();
   }
@@ -49,6 +44,7 @@ export default {
 </script>
 
 <template>
+  <h1>hello</h1>
   <ul>
     <li v-for="(todoElement, index) in todoList" :key="index">
       {{ todoElement.text }}

@@ -15,13 +15,9 @@ Solo a questo punto sarà utile passare alla *lettura/scrittura* della lista da 
     <title>Document</title>
 
     <?php
-    // autorizzare il nostro server ad accettare richieste provenienti anche dal nostro progetto Vue
-    header("Access-Control-Allow-Origin: http://127.0.0.1:5173");
-    header("Access-Control-Allow-Headers: X-Requested-With");
-
 
     // dati
-    $toDoList = [
+    $todoList = [
         [
             "text" => 'spesa',
             "done" => false
@@ -37,9 +33,13 @@ Solo a questo punto sarà utile passare alla *lettura/scrittura* della lista da 
     ];
 
 
+    // autorizzare il nostro server ad accettare richieste provenienti anche dal nostro progetto Vue
+    header("Access-Control-Allow-Origin: http://localhost:5173");
+    header("Access-Control-Allow-Headers: X-Requested-With");
+
     // trasformare dati PHP in dati JSON, leggibili quindi da JS
     header('Content-Type: application/json');
-    echo json_encode($toDoList);
+    echo json_encode($todoList);
 
     $newTodo = $_GET['newTodo'];
 
@@ -54,7 +54,7 @@ Solo a questo punto sarà utile passare alla *lettura/scrittura* della lista da 
     ];
 
     // scrivere i dati traformati da json_encode nel file todo.json
-    file_put_contents("todo.json", json_encode($toDoList));
+    file_put_contents("todo.json", json_encode($todoList));
 
     ?>
 </head>
