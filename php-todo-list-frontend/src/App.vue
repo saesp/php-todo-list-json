@@ -1,6 +1,8 @@
 <script>
 import axios from 'axios';
 
+const apiUrl = "http://localhost/";
+
 export default {
   name: 'JsonTest',
   data() {
@@ -14,11 +16,13 @@ export default {
   },
 
   methods: {
-    formSubmit(myVar) {
+    formSubmit() {
 
       // usare un oggetto (params) per memorizzare parametri che saranno inviati con la richiesta GET
       const params = {
-        param: myVar
+        param: {
+          'newTodo': this.newTodo
+        }
       };
 
       // la risposta sarà strutturata nell'oggetto "response", la cui proprietà "data" conterrà i dati inviati dal server
@@ -26,10 +30,20 @@ export default {
         this.myList(response.data);
       });
     },
+
+    getAllData() {
+
+      axios.get(apiUrl + "index.php")
+        .then(res => {
+
+          const data = res.data;
+
+          this.todoList = data;
+        });
+    }
   },
-
   mounted() {
-
+    this.getAllData();
   }
 }
 </script>
