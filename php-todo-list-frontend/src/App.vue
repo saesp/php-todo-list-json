@@ -12,8 +12,8 @@ export default {
       todoList: []
     };
   },
-  methods: {
 
+  methods: {
     formSubmit(myVar) {
 
       // usare un oggetto (params) per memorizzare parametri che saranno inviati con la richiesta GET
@@ -27,6 +27,7 @@ export default {
       });
     },
   },
+
   mounted() {
 
   }
@@ -34,6 +35,15 @@ export default {
 </script>
 
 <template>
+  <ul>
+    <li v-for="(todoElement, index) in todoList" :key="index">
+      {{ todoElement.text }}
+    </li>
+  </ul>
+  <form @submit="formSubmit">
+    <input type="text" name="newTodo" v-model="newTodo">
+    <input type="submit" value="CREATE">
+  </form>
 </template>
 
 <style scoped>
