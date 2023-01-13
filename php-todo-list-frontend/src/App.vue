@@ -14,25 +14,30 @@ export default {
   },
 
   methods: {
-    // formSubmit() {
-    //   // usare un oggetto (params) per memorizzare parametri che saranno inviati con la richiesta GET
-    //   const params = {
-    //     param: {
-    //       'newTodo': this.newTodo
-    //     }
-    //   };
+    addTodo(e) {
+      e.preventDefault();
 
-    //   // la risposta sarà strutturata nell'oggetto "response", la cui proprietà "data" conterrà i dati inviati dal server
-    //   axios.get(apiUrl, { params }).then((response) => {
-    //     this.newTodo(response.data);
-    //   });
-    // },
+      // usare un oggetto ("params") per memorizzare parametri che saranno inviati con la richiesta GET
+      const params = {
+        params: {
+          'todo': this.newTodo
+        }
+      };
+
+      // la risposta sarà strutturata nell'oggetto "response", la cui proprietà "data" conterrà i dati inviati dal server
+      axios.get(apiUrl + 'api_new_todo.php', { params })
+        .then((response) => {
+          // this.newTodo(response.data);
+          this.newTodo = "";
+          this.getAllData();
+        });
+    },
 
     getAllData() {
       axios.get(apiUrl + 'api.php')
         .then(res => {
           const data = res.data;
-          console.log(data);
+          // console.log(data);
           this.todoList = data;
         });
     }
@@ -53,8 +58,8 @@ export default {
     </li>
   </ul>
 
-  <form @submit="formSubmit">
-    <input type="text" name="newTodo" v-model="newTodo">
+  <form @submit="addTodo">
+    <input type="text" name="todo" v-model="newTodo">
     <input type="submit" value="Add">
   </form>
 </template>
