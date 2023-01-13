@@ -20,13 +20,13 @@ export default {
       // usare un oggetto ("params") per memorizzare parametri che saranno inviati con la richiesta GET
       const params = {
         params: {
-          'todo': this.newTodo
+          'task': this.newTodo
         }
       };
 
-      // la risposta sarà strutturata nell'oggetto "response", la cui proprietà "data" conterrà i dati inviati dal server
-      axios.get(apiUrl + 'api_new_todo.php', { params })
-        .then((response) => {
+      // - la risposta sarà strutturata nell'oggetto "response", la cui proprietà "data" conterrà i dati inviati dal server
+      axios.get(apiUrl + 'api_new_todo.php', params)
+        .then(() => {
           // this.newTodo(response.data);
           this.newTodo = "";
           this.getAllData();

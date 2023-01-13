@@ -4,7 +4,7 @@ header("Access-Control-Allow-Headers: X-Requested-With");
 
 header('Content-Type: application/json');
 
-$todo = $_GET['todo'];
+$task = $_GET['task'];
 
 // per leggere il contenuto del file, usare "file_get_contents()" che restituisce una stringa
 $jsonTodoList = file_get_contents("todo.json");
@@ -13,7 +13,7 @@ $todoList = json_decode($jsonTodoList);
 
 // aggiungere elemento all'array (come array.push in JS)
 $todoList[] = [
-    "text" => $todo,
+    "text" => $task,
     "completed" => false
 ];
 
