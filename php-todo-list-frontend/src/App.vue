@@ -1,37 +1,38 @@
 <script>
 import axios from 'axios';
 
-const apiUrl = "http://localhost/";
+const apiUrl = "http://localhost/php-todo-list-json/php-todo-list-backend/";
 
 export default {
-  name: 'JsonTest',
+  name: 'App.vue',
 
   data() {
     return {
-      newTodo: "",
-      todoList: []
+      todoList: [],
+      newTodo: ""
     };
   },
 
   methods: {
-    formSubmit() {
-      // usare un oggetto (params) per memorizzare parametri che saranno inviati con la richiesta GET
-      const params = {
-        param: {
-          'newTodo': this.newTodo
-        }
-      };
+    // formSubmit() {
+    //   // usare un oggetto (params) per memorizzare parametri che saranno inviati con la richiesta GET
+    //   const params = {
+    //     param: {
+    //       'newTodo': this.newTodo
+    //     }
+    //   };
 
-      // la risposta sarà strutturata nell'oggetto "response", la cui proprietà "data" conterrà i dati inviati dal server
-      axios.get(apiUrl, { params }).then((response) => {
-        this.myList(response.data);
-      });
-    },
+    //   // la risposta sarà strutturata nell'oggetto "response", la cui proprietà "data" conterrà i dati inviati dal server
+    //   axios.get(apiUrl, { params }).then((response) => {
+    //     this.newTodo(response.data);
+    //   });
+    // },
 
     getAllData() {
-      axios.get(apiUrl)
+      axios.get(apiUrl + 'api.php')
         .then(res => {
           const data = res.data;
+          console.log(data);
           this.todoList = data;
         });
     }
@@ -44,15 +45,17 @@ export default {
 </script>
 
 <template>
-  <h1>hello</h1>
+  <h1>To do list</h1>
+
   <ul>
     <li v-for="(todoElement, index) in todoList" :key="index">
       {{ todoElement.text }}
     </li>
   </ul>
+
   <form @submit="formSubmit">
     <input type="text" name="newTodo" v-model="newTodo">
-    <input type="submit" value="CREATE">
+    <input type="submit" value="Add">
   </form>
 </template>
 
