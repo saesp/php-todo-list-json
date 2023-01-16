@@ -1,19 +1,20 @@
 <?php
 // dati
 $todoList = [
-    [
-        "text" => 'spesa',
-        "done" => false
-    ],
-    [
-        "text" => 'studiare',
-        "done" => true
-    ],
-    [
-        "text" => 'integratore',
-        "done" => false
-    ],
+    // [
+    //     "text" => 'spesa',
+    //     "done" => false
+    // ],
+    // [
+    //     "text" => 'studiare',
+    //     "done" => true
+    // ],
+    // [
+    //     "text" => 'integratore',
+    //     "done" => false
+    // ],
 ];
+
 
 // trasformare dati PHP in dati JSON, leggibili quindi da JS
 $jsonTodoList = json_encode($todoList);

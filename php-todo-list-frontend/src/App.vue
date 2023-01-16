@@ -14,6 +14,16 @@ export default {
   },
 
   methods: {
+    getAllData() {
+      axios.get(apiUrl + 'api.php')
+        .then(res => {
+          const data = res.data;
+          // console.log(data);
+          this.todoList = data;
+        });
+    },
+
+
     addTodo(e) {
       e.preventDefault();
 
@@ -33,14 +43,20 @@ export default {
         });
     },
 
-    getAllData() {
-      axios.get(apiUrl + 'api.php')
-        .then(res => {
-          const data = res.data;
-          // console.log(data);
-          this.todoList = data;
+
+    deleteTodo(index) {
+
+      const params = {
+        params: {
+          'delete': index
+        }
+      };
+
+      axios.get(apiUrl + 'api_delete_todo.php', params)
+        .then(() => {
+          this.getAllData();
         });
-    }
+    },
   },
 
   mounted() {
@@ -49,12 +65,16 @@ export default {
 }
 </script>
 
+
 <template>
   <h1>To do list</h1>
 
   <ul>
     <li v-for="(todoElement, index) in todoList" :key="index">
-      {{ todoElement.text }}
+      <span @click="deleteTodo(index)">
+        {{ todoElement.text }}
+      </span>
+
     </li>
   </ul>
 
