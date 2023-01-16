@@ -2,7 +2,7 @@
 include('header.php');
 
 
-$delete = $_GET['delete'];
+$ind = $_GET['ind'];
 
 
 // DA JSON A PHP
@@ -11,7 +11,7 @@ $todoList = json_decode($jsonTodoList);
 
 
 // rimuovere elemento dall'array
-array_splice($todoList, $delete, 1);
+array_splice($todoList, $ind, 1);
 
 
 // DA PHP A JSON

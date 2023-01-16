@@ -6,12 +6,14 @@ const apiUrl = "http://localhost/php-todo-list-json/php-todo-list-backend/";
 export default {
   name: 'App.vue',
 
+
   data() {
     return {
       todoList: [],
       newTodo: ""
     };
   },
+
 
   methods: {
     getAllData() {
@@ -45,10 +47,9 @@ export default {
 
 
     deleteTodo(index) {
-
       const params = {
         params: {
-          'delete': index
+          'ind': index
         }
       };
 
@@ -59,6 +60,7 @@ export default {
     },
   },
 
+
   mounted() {
     this.getAllData();
   }
@@ -67,23 +69,57 @@ export default {
 
 
 <template>
-  <h1>To do list</h1>
+  <div class="container">
+    <h1>To do list</h1>
 
-  <ul>
-    <li v-for="(todoElement, index) in todoList" :key="index">
-      <span @click="deleteTodo(index)">
-        {{ todoElement.text }}
-      </span>
+    <ul>
+      <li v-for="(todoElement, index) in todoList" :key="index">
+        <span class="task">{{ todoElement.text }}</span>
+        <span class="delete" @click="deleteTodo(index)">Delete</span>
+      </li>
+    </ul>
 
-    </li>
-  </ul>
-
-  <form @submit="addTodo">
-    <input type="text" name="todo" v-model="newTodo">
-    <input type="submit" value="Add">
-  </form>
+    <form @submit="addTodo">
+      <input type="text" name="todo" v-model="newTodo">
+      <input type="submit" value="Add">
+    </form>
+  </div>
 </template>
 
-<style scoped>
 
+<style lang="scss" scoped>
+// @use '../style/general.scss' as *;
+.container {
+  margin: auto;
+  display: table;
+
+  h1 {
+    text-align: center;
+  }
+
+  li {
+    margin-bottom: 10px;
+    list-style-type: none;
+
+    >span {
+      display: inline-block;
+    }
+
+    .task {
+      width: 70%;
+    }
+
+    .delete {
+      margin-left: 20px;
+      color: red;
+      cursor: pointer;
+      float: right;
+    }
+  }
+
+  form {
+    display: table;
+    margin: auto;
+  }
+}
 </style>
