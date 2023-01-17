@@ -20,7 +20,6 @@ export default {
       axios.get(apiUrl + 'api.php')
         .then(res => {
           const data = res.data;
-          // console.log(data);
           this.todoList = data;
         });
     },
@@ -58,11 +57,27 @@ export default {
           this.getAllData();
         });
     },
-  },
 
 
-  mounted() {
-    this.getAllData();
+    toggleTodo(index) {
+      const params = {
+        params: {
+          'ind': index
+        }
+      };
+
+      axios.get(apiUrl + 'api_toggle_todo.php', params)
+        .then(() => {
+          // this.newTodo(response.data);
+          this.newTodo = "";
+          this.getAllData();
+        });
+    },
+
+
+    mounted() {
+      this.getAllData();
+    }
   }
 }
 </script>
@@ -74,8 +89,19 @@ export default {
 
     <ul>
       <li v-for="(todoElement, index) in todoList" :key="index">
-        <span class="task">{{ todoElement.text }}</span>
-        <span class="delete" @click="deleteTodo(index)">Delete</span>
+        <div>
+          <s v-if="todoElement.completed === true" class="task">{{ todoElement.text }}</s>
+          <span v-else class="task">{{ todoElement.text }}</span>
+        </div>
+
+        <div class="todo-right">
+          <span @click="toggleTodo(index)">
+            <div v-if="todoElement.completed === true">DONE</div>
+            <div v-else>NOT DONE</div>
+          </span>
+
+          <span class="delete" @click="deleteTodo(index)">Delete</span>
+        </div>
       </li>
     </ul>
 
@@ -100,20 +126,26 @@ export default {
   li {
     margin-bottom: 10px;
     list-style-type: none;
-
-    >span {
-      display: inline-block;
-    }
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
     .task {
       width: 70%;
     }
 
-    .delete {
-      margin-left: 20px;
-      color: red;
-      cursor: pointer;
-      float: right;
+    .todo-right {
+      display: flex;
+
+      span {
+        cursor: pointer;
+      }
+
+      .delete {
+        margin-left: 20px;
+        color: red;
+        // float: right;
+      }
     }
   }
 
