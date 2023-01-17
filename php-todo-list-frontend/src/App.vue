@@ -91,7 +91,7 @@ export default {
 // @use '../style/general.scss' as *;
 .container {
   margin: auto;
-  display: table;
+  width: 60vh;
 
   h1 {
     text-align: center;
