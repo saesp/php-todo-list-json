@@ -84,8 +84,13 @@ export default {
 
 
 <template>
-  <div class="container">
-    <h1>To do list</h1>
+  <div class="container _container">
+    <h1 class="mb-5 mt-3 text-center text-primary-emphasis">To do list</h1>
+
+    <form @submit="addTodo" class="mb-4">
+      <input type="text" name="todo" v-model="newTodo" placeholder="Task" class="px-1 border-radius-3">
+      <button type="submit" class="px-2">Add</button>
+    </form>
 
     <ul>
       <li v-for="(todoElement, index) in todoList" :key="index">
@@ -104,24 +109,14 @@ export default {
         </div>
       </li>
     </ul>
-
-    <form @submit="addTodo">
-      <input type="text" name="todo" v-model="newTodo">
-      <input type="submit" value="Add">
-    </form>
   </div>
 </template>
 
 
 <style lang="scss" scoped>
 // @use '../style/general.scss' as *;
-.container {
-  margin: auto;
+._container {
   width: 60vh;
-
-  h1 {
-    text-align: center;
-  }
 
   li {
     margin-bottom: 10px;
